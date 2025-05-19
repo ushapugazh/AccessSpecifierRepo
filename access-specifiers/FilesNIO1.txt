@@ -1,0 +1,765 @@
+Part 1
+Core Java Tutorial - Getting Started
+
+1.	The JVM is an abstract machine because it doesn't exist physically. It's a set of specifications and guidelines that define how Java bytecode should be interpreted and executed.  Using an abstract concept allows Java programs to be platform-independent and portable, running on any system with a JVM implementation
+
+The JVM reference implementation is developed by the OpenJDK project as open source code and includes a JIT compiler called HotSpot.
+
+To sum up, Java is a programming language, the JRE is a software package that is required to run Java applications, the JDK is a software development kit that is used to develop Java applications, and OpenJDK is an open-source version of the JDK.
+
+OpenJDK is an open-source implementation of the JDK and the base for the Oracle JDK. There is almost no difference between the Oracle JDK and the OpenJDK.
+
+2.	Install JDK  
+a.	https://www.oracle.com/java/technologies/javase-downloads.html
+b.	Download JDK for the Development and testing Javapp
+ 
+c.	JDK Structure 
+ 
+
+ 
+
+d.	JRE download  for the Consumer of the Java App
+Finally   
+
+Should we have to import a class if its present in the same package?   Ms No
+Constructors
+1.	what is the difference between default and no argument constructor in java 
+a.	It is created to assign the default values to the instance variables of the class when an object is created
+b.	no-arg constructor is created by the user while default constructor can only be created by the compiler.
+c.	that the body of default constructor will always be empty whereas we can insert our own code in no-arg
+2.	Whenever we use new keyword to create an instance of a class, the constructor is invoked and the object of the class is returned.
+3.	We can’t use abstract, final, static and synchronized keywords with constructors. However we can use access modifiers to control the instantiation of class object. Using public and default
+  
+ 
+4.	constructor private? In that case any other class won’t be able to create the instance of the class.
+5.	When a constructor calls another constructor of the same class, it’s called constructor chaining. We have to use this keyword to call another constructor of the class.  constructor call should be the first statement in the code block
+6.	 super constructor call should be the first statement in the child class constructor  is this falls under constructor chaining?
+7.	when instantiating child class constructor, java first initializes the super class and then child class. So if the super class constructor is not explicitly called then default or no-args constructor is called by java runtime. 
+
+Ms So Java does not Implicitly calls its own no-arg constructor  
+
+  
+ 
+
+See below super can be used to invoke the static method also
+ 
+8.	what are the different ways a static member in java can be accessed
+a.	Using the class name: This is the most common and direct way to access static members. It does not require creating an instance of the class
+b.	Using an instance of the class: Although not recommended, static members can also be accessed using an object of the class. However, the static member is not tied to the instance itself but rather to the class.
+c.	Within the same class: Inside the class where the static member is defined, it can be accessed directly by its name.
+d.	From a subclass: Static members of a superclass can be accessed by the subclass using the class name of the superclass or the subclass name
+e.	Ms  from above example  we had also use below ways in the child class
+1.	 super.i;  
+2.	 super.m();   
+3.	m()
+4.	return i;
+f.	ms we can also use this.staticVariableName its also allowed 
+Note  It's important to note that while accessing static members through an instance is possible, it's generally discouraged as it can lead to confusion about whether the member is associated with the instance or the class. The preferred way is to use the class name for clarity and to emphasize that the member belongs to the class itself.
+9.	Ms In Java method name and variable came can be same no CE
+10.	Java copy constructor takes the object of the same class as an argument and creates a copy of it
+11.	If we need a copy of another object to do some processing. We can do this by following ways:
+a.	implement cloning
+b.	providing a utility method for deep copy of the object.
+c.	Having a copy constructor
+
+12.	what is deep copy and shallow copy of Object in java 
+ 
+13.	 why it’s better to have copy constructor to copy an object  
+14.	how to do deep copy and shallow copy of objects in java?
+a.	By default, the clone() method performs a shallow copy. However, you can override the clone() method to create a deep copy by manually copying the object's fields & recursively cloning any nested objects
+
+
+b.	The default implementation of the clone method creates a shallow copy of the source object,
+c.	
+15.	A shallow copy of an object copies all the member fields, but it does not copy objects that the fields refer to. Instead, the references to these objects are copied, meaning both the original and the copied object refer to the same objects. In Java, the clone() method creates a shallow copy by default
+16.	What is the difference between copy and clone in Java?  
+
+A copy constructor is when your class contains a constructor that accepts an instance of itself as parameter. The parameter is used to create a new instance of the class that has the exact same values for its fields as the instance class that was provided as parameter.
+Note  in a Package no 2 class can have the same name
+Constructors in Spring and Hibernate
+17.	Spring Framework: Uses constructor injection
+18.	Hibernate ORM: Hibernate ORM uses default (no-argument) constructors to instantiate objects when retrieving data from the database. The default constructor is essential because Hibernate creates objects using reflection and needs a way to instantiate an entity before setting its properties.
+What are the four types of constructors in Java?
+19.	Default Constructor
+20.	Parameterized Constructor
+21.	Copy Constructor
+22.	Private Constructor  used for  Singleton pattern.
+
+23.	 
+
+What is the difference between a constructor and an object in Java?
+24.	 
+Java Access Modifiers
+25.	through three keywords - private, protected and public. 
+26.	“default access”, “package-private” or “no modifier” If the class has “default access” then it can be accessed only from other classes in the same package. 
+
+This access is more restricted than public and protected but less restricted than private. (Least Accessible) private < default < protected < public (Most Accessible)
+
+27.	Used on Class, variables and methods.
+28.	We are allowed to use only “public” or “default” access modifiers with java classes.  along with abstract and final
+29.	We can have only one “public” class in a source file and file name should be same as the public class name   When compiling a Java file, the compiler generates a separate .class file for each class defined within it. If multiple classes were allowed to be public, it would lead to ambiguity regarding which class file should be used as the entry point for execution
+30.	private  is most restricted access and the class member will not be visible to the outer world
+31.	why java class cannot be private or protected or static Inner classes (nested classes that are members of another class) can be declared private or protected because they are within the scope of an enclosing class, and these access modifiers have meaning in that context.
+Why not private If a top-level class were private, it would be inaccessible from any other class, rendering it useless.
+Why not protected  In Java, a top-level class cannot be declared as protected because the protected access modifier is designed for controlling access to members (fields and methods) within a class hierarchy and package. Applying it to a top-level class would create ambiguity and not align with its intended purpose.
+Why not Static   
+
+
+protected keyword
+32.	If class member is “protected” then it will be accessible only to the classes in the same package and to the subclasses(ms inside other package also). 
+Summary 
+ 
+How To Use Loops in Java
+33.	Writing repetitive tasks code  will create a lot of duplicate code that is hard to read and maintain  solution use loops
+34.	A typical loop has two parts. One part is a Boolean control condition. The other part is a code block that will be executed while the condition is true or until the condition is false
+35.	There are two main types of loops: while and for loops.
+36.	The while loops depend on a Boolean condition.
+37.	The for loop condition typically depends on the increment or decrement of an integer variable
+38.	 
+
+Output  output pasted to show how – and ++ works
+ 
+39.	A do-while loop resembles a while loop, but they differ in one key aspect: the code block is executed first and then the loop condition is evaluated.  
+for Loops
+40.	 has more options than a while loop  like you can add the temporary variable, define the control condition, and change the value of the temporary variable
+41.	 
+42.	From a performance and resource usage point of view, there should be no difference, so it is mostly a matter of personal preference which loop to use. However, if the number of iterations is known, usually the for loop is preferred because it allows you to follow the code more closely.
+
+foreach Loops
+43.	Used for a  group of values, and an array 
+Infinite for and while Loops
+44.	when the control condition is always true.
+45.	You can still create such infinite loops, but there are better ways to create continuously running tasks, such as with Timer tasks. Timer tasks are preferred because they are more sophisticated and offer more options.
+static keyword in java
+46.	 
+47.	 Ms Use static keyword with a class level variable
+48.	Since static variables are shared across all the instances of Object, they are not thread safe.
+49.	Usually, static variables are used with the final keyword
+50.	 If the static variable is not private, we can access it with ClassName.variableName
+51.	Same as static variable, static method belong to class and not to class instances
+52.	 A static method can access only static variables of class and invoke only static methods of the class.
+53.	Usually, static methods are utility methods that we want to expose to be used by other classes without the need of creating an instance  For example Collections class. Java Wrapper classes
+54.	From Java 8 onwards, we can have static methods in interfaces too  Java 8 interface changes.
+Java static block
+55.	gets executed only once when the class is loaded into memory by Java ClassLoader.
+56.	Static block is used to initialize the static variables of the class.
+57.	We can’t access non-static variables in the static block. 
+58.	We can have multiple static blocks in a class
+Java Static Class
+59.	Used with nested classes
+why outer class cannot be Static
+60.	 
+From the above points, we can say Java's creators had not allowed an outer class to be static because there is no need to make it static. Allowing to make the outer class static will only increase complications, ambiguity, and duplicity.
+61.	Example of Static 
+  
+  
+Java static import
+62.	Normally we access static members using Class reference, from Java 1.5 we can use java static import to avoid class reference
+ 
+ 
+
+Java break
+63.	two forms of break statement - unlabeled and labeled.
+64.	Unlabeled break statement is used to terminate the loop containing it and can be used with switch, for, while and do-while loops.
+65.	Labeled break statement is used to terminate the outer loop, the loop should be labeled for it to work.  
+Java continue label
+66.	continue label example to skip the outer loop processing  
+
+
+Part 2
+
+Core Java Tutorial - Object Oriented Concepts
+OOPS Concepts in Java
+
+
+What is Object-Oriented Programming Model?
+67.	 object-oriented programming model revolves around the concept of Objects
+
+68.	Core OOPS concepts are:
+a.	Abstraction  Abstraction is the concept of hiding the internal details and describing things in simple terms  ms ex atm
+i.	There are many ways to achieve abstraction in object-oriented programming’s, such as encapsulation and inheritance
+j.	A Java program is also a great example of abstraction. Here java takes care of converting simple statements to machine language and hides the inner implementation details from the outer world
+k.	
+b.	Encapsulation Encapsulation is the technique used to implement abstraction in object-oriented programming
+1.	Encapsulation is used for access restriction to class members and methods by using Access modifier
+c.	Polymorphism  an object behaves differently in different situations.
+1.	Runtime polymorphism is implemented when we have an “IS-A” relationship   decision is done at runtime, hence the name as runtime polymorphism or dynamic method dispatch.
+d.	Inheritance  code reuse subclasses inherits the variables and methods of superclass.
+e.	Association
+f.	Aggregation
+g.	Composition
+
+We can use java inheritance or Object composition in java for code reuse
+Inheritance in Java Example
+69.	 is-a relationship between objects
+70.	Inheritance in Java is a mechanism where a subclass derives properties and behaviours from a parent class by using extends keyword, allowing for code reuse and hierarchical structuring.
+71.	Java Inheritance is transitive - so if Sedan extends Car and Car extends Vehicle, then Sedan is also inherited from the Vehicle class. The Vehicle becomes the superclass of both Car and Sedan.
+72.	Private members of superclass are not directly accessible to subclass. As in this example, Animal variable noOfLegs is not accessible to Cat class but it can be indirectly accessible via getter and setter methods.
+73.	Superclass members with default access is accessible to subclass ONLY if they are in same package.
+74.	Superclass constructors are not inherited by subclass.
+75.	Java doesn’t support multiple inheritance,
+76.	Upcasting and downcasting(explicitly we should do it)   ClassCastException   We can use instanceof instruction to check the inheritance between objects,
+77.	We can’t extend Final classes in java.
+78.	Best Practise  If you are not going to use Superclass in the code i.e your Superclass is just a base to keep reusable code then you can keep them as Abstract class to avoid unnecessary instantiation by client classes. It will also restrict the instance creation of base class
+Different Types of Inheritance in Java
+79.	Single Inheritance:
+80.	Multilevel Inheritance
+81.	Hierarchical Inheritance
+82.	Hybrid Inheritance: A mix of two or more types of inheritance. Java does not support direct hybrid inheritance but can be achieved using interfaces.    
+Composition in Java Example
+83.	Composition in java is the design technique to implement has-a relationship in classes.
+Performance Considerations of Inheritance in Java
+84.	While inheritance promotes code reuse, it can impact memory usage and performance if not used wisely. Key considerations include:
+ 
+85.	For performance-critical applications, consider alternatives like composition, which often provides better flexibility and maintainability.  
+
+
+86.	 
+Java Inner Class
+87.	Java inner class can be declared private, public, protected, or with default access whereas an outer class can have only public or default access
+88.	Java Nested classes are divided into two types.
+a.	static nested class  an access only static members of the outer class  OC.SIClass obj = new OC.SIClass ();
+b.	java inner class  is associated with the object of the class  The object of java inner class are part of the outer class object hence we create its obj by using   
+89.	Types of Java Inner class
+a.	local inner class  
+	defined in a method body.
+	Since the local inner class is not associated with Object, we can’t use private, public or protected access modifiers with it.
+	A local inner class can access all the members of the enclosing class and local final variables in the scope it’s defined. Additionally, it can also access a non-final local variable of the method in which it is defined, but it cannot modify them. So if you try to print non-final local variable’s value it will be allowed but if you try to change its value from inside method local inner class, you will get compile time Error.
+	
+b.	anonymous inner class
+	A local inner class without name is known as anonymous inner class. 
+	An anonymous class is defined and instantiated in a single statement.
+	Anonymous inner class always extend a class or implement an interface   Example for this  
+	Since an anonymous class has no name, it is not possible to define a constructor for an anonymous class.
+
+90.	 
+
+
+91.	why java supports primitive data types
+92.	how compositon helps in Performance?
+
+
+
+
+
+Part 3
+Core Java Tutorial - Data Types and Operators
+
+22.	Java Data Types, Primitives and Binary Literals
+23.	Java Autoboxing and Unboxing
+24.	Java Wrapper Classes
+
+22.	Java Ternary Operator
+1.	is the only conditional operator that takes three operands
+2.	is a one liner replacement for if-then-else statement and also  and switch case statements
+3.	The first operand in java ternary operator should be a boolean or a statement with boolean result. If the first operand is true then java ternary operator returns second operand else it returns third operand.
+4.	result = testStatement ? value1 : value2;
+
+Part 4
+Core Java Tutorial - Interface, Abstract Class
+Abstract Class in Java
+5.	 An abstract class is mostly used to provide a base for subclasses to extend and implement the abstract methods and override or use the implemented methods in abstract class
+6.	If abstract class doesn’t have any method implementation, its better to use interface because java doesn’t support multiple class inheritance.
+7.	All the methods in an interface are implicitly abstract unless the interface methods are static or default. Static methods and default methods in interfaces are added in Java 8,
+8.	Java Abstract class can implement interfaces without even providing the implementation of interface methods 
+9.	Default Methods are allowed only in the interface.
+10.	We can run abstract class in java like any other class if it has main() method.
+
+
+Interface in Java
+11.	define the contract for the subclasses to implement
+
+12.	Example  
+13.	An interface can’t extend any class but it can extend another interfaces
+Java Interface Benefits
+14.	Interface provides a contract for all the implementation classes, so it’s good to code in terms of interfaces because implementation classes can’t remove the methods we are using.
+Java Interface Disadvantages
+15.	 
+16.	Why Interface has private methods?
+Private methods were introduced in Java 9 to enhance code reusability and encapsulation within interfaces. They address the need for helper methods that are not part of the public API of an interface but are required by its default or static methods.
+
+Ms  so static method cannot access non-static method without object creation, so if the Static method of Interface needs to use its private method how it will use it?   Private non-static methods cannot be used inside private static methods.
+
+Difference between Abstract Class and Interface in Java
+17.	Abstract classes can have constructors but interfaces can’t have constructors.
+18.	Abstract class have all the features of a normal java class except that we can’t instantiate it.
+19.	Abstract classes methods can have access modifiers as public, private, protected, static but interface methods are implicitly public and abstract, we can’t use any other access modifiers with interface methods
+20.	Interfaces are used to define contract for the subclasses whereas abstract class also define contract but it can provide other methods implementations for subclasses to use
+Interface or Abstract Class
+21.	Java doesn’t support multiple class level inheritance  so use Interface
+22.	Also coding in terms of interfaces is one of the best practices for coding in java.
+23.	If there are a lot of methods in the contract, then abstract class is more useful because we can provide a default implementation for some of the methods that are common for all the subclasses. Also if subclasses don’t need to implement a particular method, they can avoid providing the implementation but in case of interface, the subclass will have to provide the implementation for all the methods even though it’s of no use and implementation is just empty block
+24.	If our base contract keeps on changing then interfaces can cause issues because we can’t declare additional methods to the interface without changing all the implementation classes
+
+Note  Using interfaces and abstract classes together is the best approach to design a system  For example, in JDK java.util.List is an interface that contains a lot of methods, so there is an abstract class java.util.AbstractList that provides a skeletal implementation for all the methods of List interface so that any subclass can extend this class and implement only required methods.
+We should always start with an interface as the base and define methods that every subclass should implement and then if there are some methods that only certain subclass should implement, we can extend the base interface and create a new interface with those methods. The subclasses will have the option to chose between the base interface or the child interface to implement according to its requirements 
+Java 8 interface changes
+25.	default as well as static methods in the interfaces. This has bridged the gap between abstract classes and interfaces and now interfaces are the way to go because we can extend it further by providing default implementations for new methods
+
+
+Part 5
+String Manipulation
+
+Why String is Immutable  in Java
+26.	String is immutable and final class
+27.	why String is immutable in Java
+a.	String pool is possible only because String is immutable in Java. This way Java Runtime saves a lot of heap space because different String variables can refer to the same String variable in the pool. If String would not have been immutable, then String interning would not have been possible because if any variable would have changed the value, it would have been reflected in the other variables too
+b.	If String is not immutable then it would cause a severe security threat to the application. For example, database username, password are passed as String to get database connection and in socket programming host and port details passed as String. Since String is immutable, its value can’t be changed otherwise any hacker could change the referenced value to cause security issues in the application.
+c.	Since String is immutable, it is safe for multithreading.
+d.	Strings are used in java classloader and immutability provides security that correct class is getting loaded by Classloader. For example, think of an instance where you are trying to load java.sql.Connection class but the referenced value is changed to myhacked.Connection class that can do unwanted things to your database.
+e.	Since String is immutable, its hashcode is cached at the time of creation and it doesn’t need to be calculated again. This makes it a great candidate for the key in a Map and its processing is faster than other HashMap key objects.   All the fields in String class are final except “private int hash”. This field contains the hashCode() function value. The hashcode value is calculated only when the hashCode() method is called for the first time and then cached in this field. Furthermore, the hash is generated using the final fields of String class with some calculations. So every time the hashCode() method is called, it will result in the same output. For the caller, it seems like calculations are happening every time but internally it’s cached in the hash field
+
+What is Java String Pool?
+28.	is a pool of Strings stored in Java Heap Memory.
+29.	 
+30.	 using new operator, we force String class to create a new String object in heap space(ms and not in String Constant pool). We can use intern() method to put it into the pool or refer to another String object from the string pool having the same value
+
+31.	 how many strings are getting created in the below statement;
+
+			String str = new String("Cat");
+
+In the above statement, either 1 or 2 string will be created. If there is already a string literal “Cat” in the pool, then only one string “str” will be created in the pool. If there is no string literal “Cat” in the pool, then it will be first created in the pool and then in the heap space, so a total of 2 string objects will be created  I don’t think so Check this?
+
+  
+Master Java Substring Method: Examples, Syntax, and Use Cases
+
+32.	 for extracting parts of a string
+33.	This method always returns a new string, and the original string remains unchanged because String is immutable in Java.
+ 
+
+34.	 
+That is The substring() method throws a StringIndexOutOfBoundsException  Solution: Always validate indices before calling substring().
+ 
+
+35.	
+
+36.	 
+
+Some practical Use Cases of substring()
+37.	 
+
+38.	Extracting File Extensions  
+String extension = filename.substring(filename.lastIndexOf(".") + 1);
+
+39.	Parsing URLs 
+ 
+
+Comparing substring() with split()
+40.	 
+
+How to get a substring from a list in Java?
+41.	You can use Java Streams to extract substrings from a list
+ 
+
+What is charAt() in Java?
+42.	returns the character at a specified index in a string
+ How do you extract part of a string in Java?
+43.	 substring() method is the best way to extract parts of a string, Another approach is using split() if you need multiple parts based on a delimiter
+
+Java String  https://www.digitalocean.com/community/tutorials/java-string 
+44.	String is one of the most widely used classes in Java
+45.	string is a sequence of characters but it’s not a primitive type
+46.	String is immutable object which means that it cannot be changed once it is created.
+47.	String is the only class where operator overloading is supported in java. We can concat two strings using + operator. For example "a"+"b"="ab".
+48.	String class implements Comparable interface, which provides compareTo() and compareToIgnoreCase() methods and it compares two strings lexicographically. Both strings are converted into Unicode value for comparison and return an integer value which can be greater than, less than or equal to zero
+49.	String concatenation operator (+) internally uses StringBuffer or StringBuilder class.
+
+
+Java String Methods
+50.	Methods are
+A.	split()
+Example  if input is  String s = "a/b/c/d";
+ 	split(String regex): This method splits the string using given regex expression and returns array of string  String[] a1 = s.split("/");  Output below
+ 	split(String regex, int limit): This method splits the string using given regex expression and return array of string but the element of array is limited by the specified limit. If the specified limit is 2 then the method return an array of size 2  String[] a2 = s.split("/", 2);  Output below
+
+ 
+B.	contains(CharSequence s)
+C.	length()
+D.	replace()  used to replace a specific part of string with other string  
+There are four variants  
+
+Example   
+E.	substring()
+F.	concat()
+G.	intern()
+When we create a string using string literal, it will be created in string pool but what if we create a string using new keyword with the same value that exists in string pool? Can we move the String from heap memory to string pool? For this intern() method is used and it returns a canonical representation of string object. When we call intern() method on string object that is created using the new keyword, it checks if there is already a String with the same value in the pool? If yes, then it returns the reference of that String object from the pool. If not, then it creates a new String with the same content in the pool and returns the reference.
+Java 8 String join()  
+H.	join()  A new static method join()  is from Java 8 
+ returns a new String composed of copies of the CharSequence elements joined together with a copy of the specified delimiter 
+Java 9 String Methods There are two methods added in String class in Java 9 release Both of these methods return IntStream object on which we can perform some operations. They are -
+I.	codePoints()
+J.	chars()
+Example   
+Java 11 String Class New Methods
+K.	isBlank() - returns true if the string is empty or contains only white space codepoints, otherwise false.
+L.	lines() - returns a stream of lines extracted from this string, separated by line terminators.
+M.	strip(), stripLeading(), stripTrailing() - for stripping(ms removing) leading and trailing white spaces from the string.
+N.	repeat() - returns a string whose value is the concatenation of this string repeated given number of times.
+Example   
+ 
+Difference between isBlank() and isEmpty()
+The isEmpty operator checks if a string contains no characters and is only whitespace. The isBlank operator checks if a string contains no characters, is only whitespace, and is null
+
+Java String Pool
+51.	To make Java more memory efficient, JVM introduced a special memory area for the string called String Constant Pool.
+Java Remove Character from String
+
+
+Java String Replace: How to Replace Characters and Substrings
+52.	The String class has the following methods that you can use to replace or remove characters
+O.	replace(char oldChar, char newChar)
+P.	replaceFirst(String regex, String replacement) = You can use a regular expression to remove  a pattern from a string or replace them with a specified replacement
+Q.	replaceAll(String regex, String replacement) You can use a regular expression to remove a pattern from a string
+EXAMPLE 
+
+Ex1  
+str.replaceAll("([a-z])", "");  Remove all the Lowercase Letters from a String
+String strNew = str.substring(0, str.length()-1);  Remove the Last Character from a String
+
+R.	substring(int start, int end)
+
+53.	String Programs in Java.  Later 
+
+54.	immutability of strings Drawbacks
+ 	if you need to perform multiple modifications on a string, creating a new string object for each modification can be inefficient. To address this, Java provides the StringBuilder class, which is a mutable sequence of characters. Using StringBuilder can improve efficiency when performing multiple string modifications, as it allows you to modify the string without creating a new object for each change  Example 
+
+55.	What is the difference between replace() and replaceAll()?
+ 
+
+Java String subsequence example  404
+Java String compareTo example  404
+Java Split String example  404
+Java String concatenation  404
+
+
+
+Converting String to char and vice versa
+56.	String class has three methods related to char
+S.	char[] toCharArray(): This method converts string to character array. The char array size is same as the length of the string.
+T.	char charAt(int index): This method returns character at specific index of string. This method throws StringIndexOutOfBoundsException if the index argument value is negative or greater than the length of the string.
+U.	getChars(int srcBegin, int srcEnd, char dst[], int dstBegin): This is a very useful method when you want to convert part of string to character array. First two parameters define the start and end index of the string; the last character to be copied is at index srcEnd-1. The characters are copied into the char array starting at index dstBegin and ending at dstBegin + (srcEnd-srcBegin) - 1.
+Example   
+String to byte array and vice versa
+57.	method used 
+V.	getBytes()
+ 
+
+ 
+
+We can also get the byte array using the below code
+			byte[] byteArr = str.getBytes("UTF-8");
+However if we provide Charset name, then we will have to either catch UnsupportedEncodingException exception or throw it.
+
+Java byte array to String
+58.	   output  Did you notice that I am providing char while creating the byte array? It works because of autoboxing and char ‘P’ is being converted to 80 in the byte array. That’s why the output is the same for both the byte array to string conversion
+
+String to char array
+59.	the basic difference between String and Char
+ 	char represents a single character whereas String can have zero or more characters
+Java char to String example
+60.	We can use 
+W.	String.valueOf(char c) or 
+X.	Character.toString(char c)
+Java String to char array
+Y.	charAt(int position)		 			char c = str.charAt(0);
+61.	Character array from String and Vice Versa
+Z.	char[] charArray = str.toCharArray();
+AA.	 S.o.p(Arrays.toString(charArray));   returns the char array of the String
+
+
+62.	From Char to String,
+BB.	chatAt(int index)
+CC.	
+63.	
+64.	
+65.	A
+
+String vs StringBuffer vs StringBuilder
+66.	 
+67.	 StringBuffer and StringBuilder classes provide methods to manipulate strings  ms without creating a new obj
+68.	String overrides equals() and hashCode() methods. Two Strings are equal only if they have the same character sequence. The equals() method is case sensitive. If you are looking for case insensitive checks, you should use equalsIgnoreCase() method.
+69.	The string uses UTF-16 encoding for the character stream
+
+
+String vs StringBuffer
+70.	Data Manipulation in String leads to new obj creation and they are heavy operations and generate a lot of garbage in heap
+71.	So Java has provided StringBuffer and StringBuilder classes that should be used for String manipulation, They provide append(), insert(), delete(), and substring() methods for String manipulation.
+StringBuffer vs StringBuilder
+72.	StringBuffer was the only choice for String manipulation until Java 1.4. But, it has one disadvantage that all of its public methods are synchronized  is from Java 1.0
+73.	Java 1.5 introduced a new class StringBuilder, which is similar to StringBuffer except for thread-safety and synchronization. StringBuffer has some extra methods such as substring, length, capacity, trimToSize, etc. However, these are not required since you have all these present in String too.
+StringBuilder vs StringBuffer Performance
+74.	   output  
+75.	
+76.	
+
+77.	What is the difference between subString and subSequence()
+How To Use Operators in Java
+78.	An operator is one or more symbols in combination, such as the well-known arithmetic operators minus (-) and plus (+) or the more advanced instanceof  oh instanceof is also operator is it?
+79.	When you apply operators on values or variables, you get a result from the operation
+80.	 operand, which is the value or variable on which the operators are applied
+81.	Depending on the number of operands, operators can be divided into three groups 
+ 	when there is only one operand in the operation, the operators are called unary  
+	post and pre ++ ,--
+Example  
+	The NOT operator, also known as the logical complement operator  
+Example 1 
+boolean isJavaFun = !true
+
+Example 2
+ 
+	
+ 	binary operators involve two operands 
+	Arithmetic operators
+	logical operators and the special relational operator instanceof
+	Assignment Operators 	
+	=  	 assignment operators assign the left operand to the value of the right operand
+	Compound Assignment Operators  +=, -=, *=, \=   example  x += y;
+	The Casting Operator  The last assignment operator you’ll review is the casting operator, which is a data type surrounded by parentheses: (data type). The casting operator is used for casting values, which is interpreting one data type as another   ms example  (int) ,(Double) etc..    you cannot cast int to boolean because the two data types are incompatible  because Boolean values are either true or false, and it’s impossible to determine which boolean value 1 should be
+	Casting seems straightforward, but there is one caveat. When you cast from a data type with a larger capacity to a data type with a smaller capacity, you could exceed the smaller capacity limit, which is called overflow.  
+	Relational operators compare two operands and return a boolean result
+	The first types of relational operators are equals == and not equals !=
+	The logical operators are logical AND (&), logical OR (|), and exclusive OR (^). They all evaluate two values  Exclusive OR is true if one value is true and the other is false.
+	Example  
+	An extended version of the logical operators are the so-called short-circuit logical operators: short-circuit AND (&&) and short-circuit OR (||). They are similar to the regular logical AND and OR operators, but they have one important difference: if evaluating the first operator is sufficient for the operation, the second one is not evaluated  Example    
+	
+ 	when there are three operands, the operator is ternary
+	Syntax  first operand ? second operand : third operand  The first operand must be a boolean. If it is true, then the second operand is returned from the expression. If the first operand is false, then the third operand is returne
+   
+
+
+Operator Precedence
+82.	See Koushik Notes
+
+
+
+Understanding Data Types in Java  https://www.digitalocean.com/community/tutorials/understanding-data-types-in-java 
+83.	Java is a statically typed programming language. This means that when you create a variable, you must also specify its data type, which is the type of information it stores. This is in contrast to dynamically typed languages, such as PHP.
+84.	Advantage of Statically typed  if you specify one data type and try to store a different type, such as by mistake, you won’t be able to compile the code  Thus, with statically typed languages, you can detect errors even before any testing
+85.	Java has two data types: primitive and reference (also known as non-primitive
+86.	Literals represent fixed values that can be used directly in the code and thus can be assigned both to primitive and reference types
+87.	types of literals
+a.	Primitive Type Literals  examples: 42, 'a', and true
+b.	The String Literal
+c.	The Null Literal  null, which represents the absence of a value or the non-existence of an object
+
+Local Variable Type Inference
+88.	Java 10 introduced a new feature called local variable type inference, which allows you to use the keyword var in front of a new variable, With this feature, Java will infer (that is, guess automatically) the data type from the local context.
+89.	 other statically typed languages, such as C++, support type inference
+90.	type inference cannot completely replace the use of data types because it works only with local variables, which are variables inside a method  Example for this    
+type inference does not work for non-local variables
+
+91.	Type inference happens during the compilation process
+92.	Local variables are defined inside methods and are accessible only inside the methods, which is why they’re called “local”
+
+ Java Language Keywords
+93.	 
+
+How to Write Conditional Statements in Java
+94.	changes the program flow
+95.	also called branching statements because when a condition is matched, the flow goes one way into one branch of the code
+96.	There are two types of conditionals
+a.	The first type is if and its extended else if
+b.	Second type is switch
+97.	switch statement works with a single variable and matches it against different predefined cases , Thus, you cannot evaluate boolean expressions such as x > y. Instead, you can have, for example, an int variable and match its value against other int variables
+98.	The switch conditionals have two important rules
+a)	supported data types by switch  such as the primitive types int and char, as well as the reference types String and Integer  MS enum also . Thus, you cannot use boolean variables
+b)	The values for the case statements must be literals or constants
+
+99.	GO
+
+Java ClassLoader
+1.	 
+2.	the idea of having my own ClassLoader that can customize the Java class loading is exciting
+3.	When we try to use a class, the ClassLoader loads it into the memory (ms by JVM)
+4.	three types of built-in ClassLoader
+a.	Bootstrap Class Loader  It loads rt.jar and other core classes for example java.lang.* package classes.  rt. jar contains all of the compiled class files for the base Java Runtime environment, as well as the bootstrap classes, which are the run time classes that comprise the Java platform core API
+b.	Extensions Class Loader  It loads classes from $JAVA_HOME/lib/ext directory.
+c.	System Class Loader loads classes from the current classpath
+5.	Example 
+ 
+
+ 
+Below topic covers how this Class Loading happens
+How Java ClassLoader Works?
+6.	Whenever a request is raised to load a class, it delegates it to the parent classloader. If the parent class loader doesn’t find the class then the class loader itself tries to load the class  Ms System Loader Transfers req to its Parent if it parent does not finds then System Loader itself Searches for this class and Loads into Memory 
+7.	 
+Java ClassLoader Methods
+8.	When JVM requests for a class, it invokes loadClass() function of the ClassLoader by passing the fully classified name of the Class.
+9.	The loadClass() function calls the findLoadedClass() method to check that the class has been already loaded or not. It’s required to avoid loading the same class multiple times.
+10.	If the Class is not already loaded, then it will delegate the request to parent ClassLoader to load the class.
+11.	If the parent ClassLoader doesn’t find the class then it will invoke findClass() method to look for the classes in the file system
+12.	
+Why write a Custom ClassLoader in Java?
+13.	Java default ClassLoader can load classes from the local file system, which is good enough for most of the cases
+14.	But, if you are expecting a class at the runtime or from the FTP server or via third party web service at the time of loading the class, then you have to extend the existing class loader. For example, AppletViewers load the classes from a remote web server.  ms from java/jdk to my current classpath it can search a java file and load it but what if its present in any other location? 
+Java Custom ClassLoader Example
+15.	Usecase  We will create our own ClassLoader by extending the ClassLoader class and overriding the loadClass(String name) method. If the class name will start from com.journaldev then we will load it using our custom class loader or else we will invoke the parent ClassLoader loadClass() method to load the class
+16.	Later  https://www.digitalocean.com/community/tutorials/java-classloader 
+17.	
+18.	Go
+
+The rt. jar file was removed in Java 9, but if you need to access the classfiles in the runtime, you can do so easily through the JRT file system.
+
+Part 6
+Core Java Tutorial - Arrays
+
+
+Part 7
+Core Java Tutorial - Annotation and Enum
+
+Java Annotations Tutorial
+1.	Java 1.5 introduced annotations and now it’s heavily used in Java EE frameworks like Hibernate, Jersey, and Spring.
+2.	Annotation is metadata.
+3.	 It can be parsed by the annotation parsing tool or by the compiler.   annotation parsers can use @ to determine the process flow
+4.	We can also specify annotation availability to either compile time only or till runtime.
+Java Custom Annotation
+5.	Creating custom annotation is similar to writing an interface, except that the interface keyword is prefixed with _@_ symbol
+6.	We can declare methods in annotation
+7.	Some important points about java annotations are:
+a.	Annotation methods can’t have parameters.
+b.	Annotation methods return types are limited to primitives, String, Enums, Annotation or array of these.
+c.	Java Annotation methods can have default values.
+d.	Annotations can have meta annotations attached to them. Meta annotations are used to provide information about the annotation.
+8.	Example 
+ 
+9.	There are five types of meta annotations
+a.	@Documented - 
+b.	@Target - indicates the kinds of program element to which an annotation type is applicable. Some possible values are TYPE, METHOD, CONSTRUCTOR, FIELD etc. If Target meta-annotation is not present, then annotation can be used on any program element.
+c.	@Inherited - indicates that an annotation type is automatically inherited. If user queries the annotation type on a class declaration, and the class declaration has no annotation for this type, then the class’s superclass will automatically be queried for the annotation type. This process will be repeated until an annotation for this type is found, or the top of the class hierarchy (Object) is reached.
+d.	@Retention - indicates how long annotations with the annotated type are to be retained. It takes RetentionPolicy argument whose Possible values are SOURCE, CLASS and RUNTIME
+e.	@Repeatable 
+
+
+
+10.	Example 
+  
+Doubt  okay where this @ will be really used?  I think below topic covers this
+Java Annotations Parsing
+11.	We will use Reflection to parse java annotations from a class. Please note that Annotation Retention Policy should be RUNTIME otherwise its information will not be available at runtime and we won’t be able to fetch any data from it
+
+12.	 
+
+ 
+
+
+ 
+
+Java Enum Example Tutorial
+13.	From Java 1.5 as a new type whose fields consists of a fixed set of constants
+14.	Java enum keyword is used to create an enum type.
+15.	Example   
+Java Enum vs Constants
+16.	Below Example simply says that 
+the benefit of using Enum over Constants  we can pass any int constant in Constants but with Enum only those fixed set of values have to be used.
+17.	let’s see how java enum is better than normal constants fields in Java classes with an example
+
+Step 1 Enum
+ 
+
+Step 2 with Constant
+ 
+
+Step 3method shows the benefit of using Enum over Constants
+ 
+
+Step 4 Advantages explained below 
+ 
+Java Enum Methods
+18.	This Enum example shows all the things we can do with Enum types
+19.	Below are some of the important points for Enums in Java
+a.	All java enum implicitly extends java.lang.Enum class that extends Object class and implements Serializable and Comparable interfaces. So we can’t extend any class in enum.
+b.	Since enum is a keyword, we can’t end package name with it, for example com.journaldev.enum is not a valid package name.
+c.	Enum can implement interfaces. As in above enum example, it’s implementing Closeable interface.
+d.	Enum constructors are always private.
+e.	We can’t create instance of enum using new operator Why?
+f.	We can declare abstract methods in java enum, then all the enum fields must implement the abstract method. In above example getDetail() is the abstract method and all the enum fields have implemented it.
+g.	We can define a method in enum and enum fields can override them too. For example, toString() method is defined in enum and enum field START has overridden it.
+h.	Java enum fields has namespace, we can use enum field only with class name like ThreadStates.START
+i.	Enums can be used in switch statement, we will see it in action in the later part of this tutorial.
+j.	We can extend existing enum without breaking any existing functionality. For example, we can add a new field NEW in ThreadStates enum without impacting any existing functionality.
+k.	Since enum fields are constants, java best practice is to write them in block letters and underscore for spaces. For example EAST, WEST, EAST_DIRECTION etc.
+l.	Enum constants are implicitly static and final
+m.	Enum constants are final but it’s variable can still be changed. For example, we can use setPriority() method to change the priority of enum constants. We will see it in usage in below example.
+20.	Since enum constants are final, we can safely compare them using “==” and equals() methods. Both will have the same result
+21.	Example 
+ 
+
+ 
+
+
+a.	.
+
+Java EnumSet, EnumMap, valueOf()
+22.	EnumSet, EnumMap is from java.util package
+23.	Important Points
+a.	The usingEnumMethods() methods shows how to create an enum object and how we can use its methods. It’s also showing use of setPriority(int i) method to change the variable of enum.
+b.	usingEnumValueOf() shows the usage of java.util.Enum valueOf(enumType, name) through which we can create an enum object from String. It throws IllegalArgumentException if the specified enum type has no constant with the specified name, or the specified class object does not represent an enum type. It also throws NullPointerException if any of the arguments are null.
+c.	usingEnumValues() method shows the usage of values() method that returns an array containing all of the values of the enum in the order they are declared. Note that this method is automatically generated by java compiler for every enum. You won’t find values() implementation in java.util.Enum class.
+d.	The usingEnumInSwitch() method shows how to use enum constants in switch case.
+e.	usingEnumMap() method shows use of java.util.EnumMap, which is introduced in Java 1.5 Collections Framework. EnumMap is Map implementation for use with enum type keys. All of the keys in an enum map must come from a single enum type that is specified, explicitly or implicitly, when the map is created. We can’t use null as key for EnumMap and EnumMap is not synchronized.
+f.	usingEnumSet() method shows use of java.util.EnumSet, which is Set implementation for use with enum types. All of the elements in an enum set must come from a single enum type that is specified, explicitly or implicitly, when the set is created. EnumSet is not synchronized and null elements are not allowed. It also provides some useful methods like copyOf(Collection<E> c), of(E first, E... rest) and complementOf(EnumSet<E> s)
+g.	
+24.	Examples 
+a.	Example for  usingEnumMethods();	
+ 
+	
+
+
+b.	Example for  usingEnumValueOf();
+ 
+
+
+
+c.	Example for  usingEnumValues();	
+ 
+
+
+	
+d.	Example for  usingEnumInSwitch(ThreadStatesEnum.START);
+ 
+
+
+
+e.	Example for  usingEnumInSwitch(ThreadStatesEnum.DEAD);		
+ 
+
+
+	
+f.	Example for  usingEnumSet();
+
+ 
+
+
+g.	Example for  usingEnumMap();	
+h.	 
+	
+Output see above Program was a single Prog but I had spitted into parts for Simplification
+ 
+
+25.	GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
