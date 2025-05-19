@@ -10,6 +10,6 @@ public class A extends B{
 
 
 class B{
-	private int j=15;
+	private int j=15; //Test
 }
 
